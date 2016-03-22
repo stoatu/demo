@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+    <link rel="stylesheet" href="" media="screen and (min-width:400px)"/>
+    <link rel="stylesheet" href="" media="screen and (min-width:600px) and (max-width:900px)"/>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script>
+        $(document).bind('mobileinit',function() {
+            $.mobile.pushStateEnabled = false;
+        });
+    </script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <style>
+
+        .demo {
+        /*一般透明*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+        /*线型透明*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20,FinishOpacity=100,Style=1,StartX=0,StartY=0,FinishX=200,FinishY=200);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20,FinishOpacity=100,Style=1,StartX=0,StartY=0,FinishX=200,FinishY=200);
+        /*放射透明*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0,FinishOpacity=100,Style=2);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0,FinishOpacity=100,Style=2);
+        /*柔光效果*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0,FinishOpacity=100,Style=3);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0,FinishOpacity=100,Style=3);
+        }
+
+        .demo1 {
+        /*投影效果*/
+        -ms-filter: progid:DXImageTransform.Microsoft.DropShadow(Color=#000,OffX=5,OffY=5,Positives=true);
+            filter: progid:DXImageTransform.Microsoft.DropShadow(Color=#000,OffX=5,OffY=5,Positives=true);
+        /*阴影效果*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Shadow(Color=#000,Direction=135,Strength=10);
+            filter: progid:DXImageTransform.Microsoft.Shadow(Color=#000,Direction=135,Strength=10);
+        }
+
+        .demo2 {
+        /*虑色效果*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Chroma(Color=#000);
+            filter: progid:DXImageTransform.Microsoft.Chroma(Color=#000);
+        /*马赛克*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Pixelate(Maxsquare=3);
+            filter: progid:DXImageTransform.Microsoft.Pixelate(Maxsquare=3);
+        /*发光效果*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=5);
+            filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=5);
+        }
+
+        .demo3 {
+        filter: fliph;  /* 水平翻转 */
+        filter: flipv;  /* 垂直翻转 */
+        filter: invert;  /* 反色效果 */
+        filter: gray;  /* 黑白效果 */
+        filter: xray; /* X光照片 */
+        }
+
+        .demo4 {
+        /*一般模糊*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Blur(Pixelradius=7);
+            filter: progid:DXImageTransform.Microsoft.Blur(Pixelradius=7);
+        /*风动模糊*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Blur(Add=ture,Direction=45,Strength=30);
+            filter: progid:DXImageTransform.Microsoft.Blur(Add=true,Direction=45,Strength=30);
+        }
+
+        .demo5 {
+        /*正弦波纹*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Wave(Add=0,Freq=60,LightStrength=1,Phase=0,Strength=3);
+            filter: progid:DXImageTransform.Microsoft.Wave(Add=0,Freq=60,LightStrength=1,Phase=0,Strength=3);
+        /*渐变效果*/
+        -ms-filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#000',EndColorStr='#fff');
+            filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#000',EndColorStr='#fff');
+        }
+
+        .demo6 {
+        /*使png背景透明的滤镜*/
+        -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(Src='');
+            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(Src='');
+        }
+
+    </style>
+</head>
+<body>
+
+<!--<div data-role="page" id="pageone">
+    <div data-role="header">
+        <h1>欢迎访问我的主页</h1>
+    </div>
+
+    <div data-role="content">
+        <p>Welcome!</p>
+        <a href="#pagetwo">转到页面二</a>
+    </div>
+
+    <div data-role="footer">
+        <h1>页脚文本</h1>
+    </div>
+</div>
+
+<div data-role="page" id="pagetwo">
+    <div data-role="header">
+        <h1>欢迎访问我的主页</h1>
+    </div>
+
+    <div data-role="content">
+        <p>Goodbye!</p>
+        <a href="#pageone">转到页面一</a>
+    </div>
+
+    <div data-role="footer">
+        <h1>页脚文本</h1>
+    </div>
+</div>-->
+
+<script>
+    //拒绝frame
+    try {
+        top.location.hostname;
+
+        if (top.location.hostname !== window.location.href){
+            top.location.href = window.location.href;
+        }
+    } catch(e){
+        top.location.href = window.location.href;
+    }
+
+    //鼠标滚轮事件
+    document.onmousewheel = function (event){}
+    document.addEventListener('DOMMouseScroll',function (event){})
+
+    //获取窗口大小
+    function getViewFunc(){
+        if (document.compatMode === 'BackCompat'){
+            return {
+                width: document.body.clientWidth,
+                height: document.body.clientHeight
+            }
+        } else {
+            return {
+                width: document.documentElement.clientWidth,
+                height: document.documentElement.clientHeight
+            }
+        }
+    }
+
+    //获取网页大小
+    function getPagearea(){
+        if (document.compatMode === 'BackCompat'){
+            return {
+                width: Math.max(document.body.scrollWidth,document.body.clientWidth),
+                height: Math.max(document.body.scrollHeight,document.body.clientHeight)
+            }
+        } else {
+            return {
+                width: Math.max(document.documentElement.scrollWidth,document.documentElement.clientWidth),
+                height: Math.max(document.documentElement.scrollHeight,document.documentElement.clientHeight)
+            }
+        }
+    }
+
+    //获取网页元素的绝对定位
+    function getElementPosition(elem){
+        var _position = {
+            top: elem.offsetTop,
+            left: elem.offsetLeft
+        };
+        var _parent = elem.offsetParent;
+
+        while (_parent !== null){
+            _position = {
+                top: _position.top + _parent.offsetTop,
+                left: _position.left + _parent.offsetLeft
+            }
+
+            _parent=_parent.offsetParent;
+        }
+
+        return _position;
+    }
+
+    //获取网页元素的相对位置
+    function getElementView(elem){
+        var _position = {
+            top: elem.offsetTop,
+            left: elem.offsetLeft
+        };
+        var _parent = elem.offsetParent;
+
+        while (_parent !== null){
+            _position = {
+                top: _position.top + _parent.offsetTop,
+                left: _position.left + _parent.offsetLeft
+            }
+
+            _parent = _parent.offsetParent;
+        }
+
+        if (document.compatMode === 'BackCompat'){
+            _position = {
+                top: _position.top - document.body.scrollTop,
+                left: _position.left - document.body.scrollLeft
+
+            }
+        } else {
+            _position = {
+                top: _position.top - document.documentElement.scrollTop,
+                left: _position.left -document.documentElement.scrollLeft
+            }
+        }
+
+        return _position;
+    }
+
+    //快速排序
+    var quickSort = function(arr){
+        if (arr.length <= 1){return arr}
+
+        var pivotIndex = Math.floor(arr.length / 2);
+        var pivot = arr.splice(pivotIndex,1)[0];
+        var left = [];
+        var right = [];
+
+        for (var i =0; i < arr.length; i += 1){
+            if (arr[i] < pivot){
+                 left.push(arr[i]);
+            } else {
+                right.push(arr[i]);
+            }
+        }
+
+        return quickSort(left).concat([pivot],quickSort(right));
+    }
+
+    //deferred对象(Jquery-1.5.0)
+    $.ajax('url')
+            .done(function (){})
+            .fail(function (){})
+            .done(function (){});
+
+    $.when($.ajax('url1'), $.ajax('url2'))
+            .done(function (){})
+            .fail(function (){});
+
+    var dtd = $.Deferred();
+    var wait = function (dtd){
+        var tasks = function (){
+            console.log('finish');
+            dtd.resolve();
+        };
+
+        setTimeout(tasks,3000);
+
+        return dtd;
+    };
+
+    $.Deferred(wait)
+            .done(function (){})
+            .fail(function (){});
+
+    //极简主义法
+    var Animal = {
+        createNew: function (){
+            var animal = {};
+
+            animal.type = 'animal';
+            animal.sleep = function (){
+                console.log('animal sleep');
+            }
+
+            return animal;
+        }
+    };
+    var Cat = {
+        sound: 'mimimi',
+        createNew: function (){
+            var cat = Animal.createNew();
+
+            cat.name = 'tom';
+            cat.eat = function (){
+                console.log('cat eat food');
+            };
+            cat.makeSound = function (){
+                console.log(Cat.sound);
+            };
+            cat.changeSound = function (x){
+                Cat.sound = x;
+            };
+
+            return cat;
+        }
+    };
+
+    var cat1 = Cat.createNew();
+    var cat2 = Cat.createNew();
+
+    cat1.makeSound();
+    cat2.changeSound('lalala');
+    cat1.makeSound();
+
+    //iframe上传文件
+    var form = $('#upload-form');
+
+    form.on('submit',function (){
+        var seed = Math.floor(Math.random() * 1000);
+        var id = 'uploader-frame-' + seed;
+        var callback = 'uploader-cb-' + seed;
+        var iframe = $('<iframe id="' + id + '" name="' + id + '" style="display:none">');
+        var url = form.attr('action');
+
+        form.attr('target',id).append(iframe).attr('action',url + '?iframe=' + callback);
+    });
+
+    //XMLHttpRequest
+    var xhr;
+
+    function createXMLHttpRequest(){
+        if (window.XMLHttpRequest){
+            xhr = new XMLHttpRequest();
+        } else if (window.ActiveXObject){
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+    }
+
+    function getSend(){
+        var value = document.getElementById('content').value;
+        var url = convertURL('ajaxServlet?value=' + value);
+
+        createXMLHttpRequest();
+        xhr.open('GET',url,true);
+        xhr.onreadystatechange = processResponse;
+        xhr.send(null);
+    }
+
+    function postSend(){
+        var value = document.getElementById('content').value;
+        var url = 'ajaxServlet';
+
+        createXMLHttpRequest();
+        xhr.open('POST',url,true);
+        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhr.onreadystatechange = processResponse;
+        xhr.send('value=' + value);
+    }
+
+    function processResponse(){
+        if (xhr.readyState === 1){
+            console.log('xhr开始发送');
+        } else if (xhr.readyState === 2){
+            console.log('xhr发送完成');
+        } else if (xhr.readyState === 3){
+            console.log('xhr开始读取服务器响应');
+        } else if (xhr.readyState === 4){
+            console.log('xhr读取服务器响应完成');
+
+            if (xhr.status === 200){
+                var headers = xhr.getAllResponseHeaders();
+                var infor = xhr.responseText;
+
+                console.log('所有的响应头=' + headers,'响应内容=' + infor);
+            } else {
+                console.log('所请求的服器出了问题');
+            }
+        }
+    }
+
+    function convertURL(url){
+        var timstamp = (new Date()).valueOf();
+
+        if (url.indexOf('?') >= 0){
+            url = url + '&t=' + timstamp;
+        } else {
+            url = url + '?t=' + timstamp;
+        }
+
+        return url;
+    }
+
+
+</script>
+</body>
+</html>
+locate locate location location local local host host branch branch patch patch initial initial ignore ignore
+recursively recursively commit commit track track explain explain distributed distributed pretty pretty origin
+origin remote remote skill skill merge generator generator business business exchange exchange current current
+design design register register account account member member amount amount price price direction direction
+query query request request response response entrust entrust folder folder connection connection container
+container global global report report trial trial convert convert script script static static variable variable
+comment comment collect collect auth auth sign sign sample sample record record failure failure aborted aborted
+external external partials partials console console control control repository repository transfer transfer
+ownership ownership directory directory module module wrapper wrapper assign assign dependency dependency
+selected selected client client contrib contrib strict strict viewport viewport device device offset offset
+paste paste browser browser modify modify graph graph resolve resolve lock lock release release navigate
+navigate refactor refactor common common listener listener prompt prompt captial captial discuss discuss
+ellipsis ellipsis menage menage refersh refresh draw draw empty empty transparent transparent balance balance
+cash cash export export example example file file universe universe publish publish article article visual
+visual ideal ideal decoration decoration level level lavel lavel stack stack format format double double
+virtual virtual filter filter opacity opacity blur blur focus focus mobile mobile revert revert alpha alpha
+shadow shadow drop drop transform transform chroma chroma strength strength flip flip gray gray vertical
+vertical caption caption summary summary target target nultiple multiple plaintext plaintext arguments
+arguments compat compat develop develop prototype prototype property property instance instance since since
+output output embed embed program program pixelate pixelate glow glow gradient gradient pivot pivot deferred
+deferred promise promise contact contact communicate communicate produce produce personal personal preference
+preference self-expression hoist hoist required required upload upload download download method method progress
+progress product product XMLHttpRequest definition definition software software support support stupid stupid
+conflict conflict fix fix issue fatal fatal circle circle stroke stroke world wide web consortium world wide
+web consortium sketch sketch screen screen recognized recognized dialog dialog carry carry responsive
+responsive media media incorrect incorrect
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
