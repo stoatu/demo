@@ -1,2 +1,3 @@
 package.json
 data-proxy/httpconfig.js
+data-proxy/file.js
